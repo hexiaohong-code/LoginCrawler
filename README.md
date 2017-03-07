@@ -12,7 +12,7 @@ LoginCrawler是一套基于[Webmagic](https://github.com/code4craft/webmagic)框
 正方教务系统、人人网、知乎网测试登录成功并爬取主页信息。大家可以尝试不同的网站进行登录测试，发现问题可以通过以下方式联系我,谢谢(详细的测试样例见项目)
 
 ## 验证码登录（正方教务系统）
-    public class ZhengFangProcessor implements PageLoginProcessor {
+        public class ZhengFangProcessor implements PageLoginProcessor {
 
         private static final Logger logger = LoggerFactory.getLogger(ZhengFangProcessor.class);
 
@@ -54,7 +54,7 @@ LoginCrawler是一套基于[Webmagic](https://github.com/code4craft/webmagic)框
         }
 
 ## 无验证码登录（知乎网站）
-    public class ZhiHuProcessor implements PageLoginProcessor {
+        public class ZhiHuProcessor implements PageLoginProcessor {
 
         private static final Logger logger = LoggerFactory.getLogger(ZhiHuProcessor.class);
 
