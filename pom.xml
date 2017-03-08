@@ -11,7 +11,7 @@
 
     <groupId>com.web.crawler</groupId>
     <artifactId>login-crawler</artifactId>
-    <version>1.0.0-RC01</version>
+    <version>1.0.1-develop-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <build>

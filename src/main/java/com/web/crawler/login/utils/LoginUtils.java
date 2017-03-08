@@ -118,8 +118,12 @@ public class LoginUtils {
         Map<String, Object> retVal = new HashMap<String, Object>();
 
         Document doc = Jsoup.parse(html);
-        Elements elements = doc.select("form").first()
-                .select("input[type=hidden]");
+        Element elt = doc.select("form").first();
+        if (elt == null){
+            return retVal;
+        }
+
+        Elements elements = elt.select("input[type=hidden]");
         if (elements != null) {
             for (Element element : elements) {
                 retVal.put(element.attr("name"), element.val());
