@@ -68,7 +68,7 @@ public class CodeModuleImpl implements CodeModule {
 
             File file = new File(loginEntity.getCodePath());
             if (!file.exists()) {
-                file.mkdir();
+                file.mkdirs();
             }
 
             String filePath = loginEntity.getCodePath() + (loginEntity.getCodePath().endsWith("/") ? "" : "/") + loginEntity.getCodeName();
