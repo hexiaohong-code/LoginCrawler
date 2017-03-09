@@ -9,7 +9,8 @@ LoginCrawler是一套基于[Webmagic](https://github.com/code4craft/webmagic)框
        <version>1.0.0-RC01</version>
     </dependency>
 # 测试样例
-正方教务系统、人人网、知乎网测试登录成功并爬取主页信息。大家可以尝试不同的网站进行登录测试，发现问题可以通过以下方式联系我,谢谢(详细的测试样例见项目)
+* 正方教务系统、人人网、知乎网测试登录成功并爬取主页信息。大家可以尝试不同的网站进行登录测试，发现问题可以通过以下方式联系我,谢谢(详细的测试样例见项目)
+* 2017/3/9 新增金山网络登陆测试。
 
 ## 验证码登录（正方教务系统）
         public class ZhengFangProcessor implements PageLoginProcessor {
