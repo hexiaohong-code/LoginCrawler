@@ -42,6 +42,11 @@ public class ZhengFangProcessor implements PageLoginProcessor {
     }
 
     @Override
+    public void beforeRequestLogin(LoginEntity loginEntity) {
+
+    }
+
+    @Override
     public void setSite(Site site) {
         site.setRetryTimes(1);
     }

@@ -60,7 +60,7 @@ public class CodeModuleImpl implements CodeModule {
                 return httpResult;
             }
 
-            loginEntity.setCookie(loginEntity.getCookie()+LoginUtils.getCookie(httpResponse));
+            loginEntity.setCookie(loginEntity.getCookie() + LoginUtils.getCookie(httpResponse));
 
             if (StringUtils.isBlank(loginEntity.getCodeName())) {
                 loginEntity.setCodeName(MD5Utils.digest(loginEntity.getCodeUrl()) + ".jpg");

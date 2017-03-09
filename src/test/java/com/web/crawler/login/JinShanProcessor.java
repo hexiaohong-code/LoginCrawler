@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,13 +38,20 @@ public class JinShanProcessor implements PageLoginProcessor {
         params.put("rm", "1");
         params.put("cn", "b06aa38e7641826933720e37f481ac7c");
         loginEntity.setParams(params);
-        loginEntity.setLoginUrl("https://login.ijinshan.com/glt?_lt="+(System.currentTimeMillis()+10000*1000));
+        loginEntity.setLoginUrl("https://login.ijinshan.com/login.html");
         loginEntity.setActionUrl("https://login.ijinshan.com/login");
-        loginEntity.setCodeUrl("https://login.ijinshan.com/imgCode?_dc="+(System.currentTimeMillis()+10000*1000)+"&cn=b06aa38e7641826933720e37f481ac7c");
+        loginEntity.setCodeUrl("https://login.ijinshan.com/imgCode?_dc=" + (System.currentTimeMillis()) + "&cn=b06aa38e7641826933720e37f481ac7c");
         loginEntity.setCharset("UTF-8");
         loginEntity.setUnEscape(true);
-        loginEntity.setMark("账号或密码错误;不存在;密码错误;验证码错误;登录失败;");
+        loginEntity.setMark("用户名或密码错误;验证错误;验证码错误;登录失败;");
         loginEntity.setActionUrl("https://login.ijinshan.com/login");
+    }
+
+    @Override
+    public void beforeRequestLogin(LoginEntity loginEntity) {
+        List<String> urlList = new ArrayList<String>();
+        urlList.add("https://login.ijinshan.com/glt?_lt=" + System.currentTimeMillis());
+        loginEntity.setUrlBeforLogin(urlList);
     }
 
     @Override

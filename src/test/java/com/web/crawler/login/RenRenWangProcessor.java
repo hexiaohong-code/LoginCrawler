@@ -44,6 +44,11 @@ public class RenRenWangProcessor implements PageLoginProcessor {
 
     }
 
+    @Override
+    public void beforeRequestLogin(LoginEntity loginEntity) {
+
+    }
+
     public static void main(String[] args) {
         SpiderLogin spiderLogin = SpiderLogin.create(new RenRenWangProcessor());
         if (!spiderLogin.downloadCode()) {

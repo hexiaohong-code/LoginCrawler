@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.http.Header;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +34,8 @@ public class LoginEntity implements Serializable {
     private String codePath = ConstantDefine.Code.PATH;// 验证码存储绝对路径
 
     private boolean unEscape;// 是否需要反转义字符串
+
+    private List<String> urlBeforLogin;
 
     public String getLoginUrl() {
         return loginUrl;
@@ -120,6 +123,14 @@ public class LoginEntity implements Serializable {
 
     public void setUnEscape(boolean unEscape) {
         this.unEscape = unEscape;
+    }
+
+    public List<String> getUrlBeforLogin() {
+        return urlBeforLogin;
+    }
+
+    public void setUrlBeforLogin(List<String> urlBeforLogin) {
+        this.urlBeforLogin = urlBeforLogin;
     }
 
     public String toString() {

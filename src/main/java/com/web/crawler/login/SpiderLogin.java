@@ -766,6 +766,7 @@ public class SpiderLogin implements Runnable, Task {
             return false;
         }
 
+        accessorBeforeLogin(this.loginEntity);
         LoginModule loginModule = new LoginModuleImpl();
         HttpResult httpResult = loginModule.request(this.loginEntity);
         if (httpResult.getStatusCode() != 200 && httpResult.getStatusCode() != 302) {
@@ -781,6 +782,23 @@ public class SpiderLogin implements Runnable, Task {
         }
         logger.info("登录成功后,主页链接：{}", loginIndexUrl);
         return true;
+    }
+
+    private void accessorBeforeLogin(LoginEntity loginEntity) {
+        pageLoginProcessor.beforeRequestLogin(loginEntity);
+
+        if (loginEntity.getUrlBeforLogin() != null) {
+            List<String> urlList = loginEntity.getUrlBeforLogin();
+            for (String url : urlList) {
+                LoginEntity loginEntityOther = new LoginEntity();
+                loginEntityOther.setLoginUrl(url);
+                loginEntityOther.setCharset(loginEntity.getCharset());
+                LoginModule loginModule = new LoginModuleImpl();
+                loginModule.access(loginEntityOther);
+                String cookie = loginEntity.getCookie();
+                loginEntity.setCookie(cookie + loginEntityOther.getCookie());
+            }
+        }
     }
 
     /**
@@ -813,4 +831,5 @@ public class SpiderLogin implements Runnable, Task {
     public String getResponseBody() {
         return responseBody;
     }
+
 }

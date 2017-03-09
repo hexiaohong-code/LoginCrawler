@@ -119,7 +119,7 @@ public class LoginUtils {
 
         Document doc = Jsoup.parse(html);
         Element elt = doc.select("form").first();
-        if (elt == null){
+        if (elt == null) {
             return retVal;
         }
 
@@ -333,11 +333,11 @@ public class LoginUtils {
      * @return
      */
     public static String getIp() {
-        return getNum(1,255) + "." + getNum(0,255) + "." + getNum(0,255) + "."
-                +getNum(0,255);
+        return getNum(1, 255) + "." + getNum(0, 255) + "." + getNum(0, 255) + "."
+                + getNum(0, 255);
     }
 
-    public static int getNum(int start,int end) {
-        return (int)(Math.random()*(end-start+1)+start);
+    public static int getNum(int start, int end) {
+        return (int) (Math.random() * (end - start + 1) + start);
     }
 }

@@ -25,6 +25,13 @@ public interface PageLoginProcessor {
     void setLoginEntity(LoginEntity loginEntity);
 
     /**
+     * The requested login before action
+     *
+     * @param loginEntity
+     */
+    void beforeRequestLogin(LoginEntity loginEntity);
+
+    /**
      * set the site
      *
      * @param site
