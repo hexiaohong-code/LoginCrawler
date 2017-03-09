@@ -95,6 +95,8 @@ public class SpiderLogin implements Runnable, Task {
 
     private String loginIndexUrl;
 
+    private String responseBody;
+
     /**
      * create a spider with pageProcessor.
      *
@@ -773,6 +775,7 @@ public class SpiderLogin implements Runnable, Task {
 
         this.site.addHeader("Cookie", this.loginEntity.getCookie());
         this.loginIndexUrl = this.loginEntity.getLoginUrl();
+        this.responseBody = httpResult.getBody();
         if (httpResult.getStatusCode() == 302) {
             this.loginIndexUrl = httpResult.getLocation();
         }
@@ -797,7 +800,17 @@ public class SpiderLogin implements Runnable, Task {
      * @return
      * @since 0.6.2
      */
-    public String getLoginIndex() {
-        return this.loginIndexUrl;
+    public String getLoginIndexUrl() {
+        return loginIndexUrl;
+    }
+
+    /**
+     * get the response body
+     *
+     * @return
+     * @since 0.6.2
+     */
+    public String getResponseBody() {
+        return responseBody;
     }
 }

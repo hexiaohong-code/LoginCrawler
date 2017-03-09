@@ -1,10 +1,12 @@
 package com.web.crawler.login;
 
+import com.alibaba.fastjson.JSONObject;
 import com.web.crawler.login.model.LoginEntity;
 import com.web.crawler.login.processor.PageLoginProcessor;
 import com.web.crawler.login.utils.LoginUtils;
 import com.web.crawler.login.utils.MD5Utils;
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
@@ -18,9 +20,9 @@ import java.util.Map;
  * @author 564137276@qq.com <br>
  * @since 1.0.0
  */
-public class JinShanProcessor implements PageLoginProcessor {
+public class JinShanYouXiProcessor implements PageLoginProcessor {
 
-    private static final Logger logger = LoggerFactory.getLogger(JinShanProcessor.class);
+    private static final Logger logger = LoggerFactory.getLogger(JinShanYouXiProcessor.class);
 
     @Override
     public void process(Page page) {
@@ -32,17 +34,16 @@ public class JinShanProcessor implements PageLoginProcessor {
         Map<String, Object> params = new HashedMap();
         params.put("user", "fc7kj");
         params.put("pwd", MD5Utils.digest("zhang520"));
-        params.put("service", "");
+        params.put("service", "http://i.wan.liebao.cn/login?go=http://wan.liebao.cn/game_frame/play_1087.php?sid=22&supplier_id=2");
         params.put("rm", "1");
-        params.put("cn", "b06aa38e7641826933720e37f481ac7c");
+        params.put("cn", "a6742619ae9d91bfb87b0f9507c8d0ad");
         loginEntity.setParams(params);
-        loginEntity.setLoginUrl("https://login.ijinshan.com/glt?_lt="+(System.currentTimeMillis()+10000*1000));
+        loginEntity.setLoginUrl("https://login.ijinshan.com/webgame/w/loginpage.html");
         loginEntity.setActionUrl("https://login.ijinshan.com/login");
-        loginEntity.setCodeUrl("https://login.ijinshan.com/imgCode?_dc="+(System.currentTimeMillis()+10000*1000)+"&cn=b06aa38e7641826933720e37f481ac7c");
+        loginEntity.setCodeUrl("https://login.ijinshan.com/imgCode?_dc="+(System.currentTimeMillis())+"&cn=a6742619ae9d91bfb87b0f9507c8d0ad");
         loginEntity.setCharset("UTF-8");
         loginEntity.setUnEscape(true);
-        loginEntity.setMark("账号或密码错误;不存在;密码错误;验证码错误;登录失败;");
-        loginEntity.setActionUrl("https://login.ijinshan.com/login");
+        loginEntity.setMark("账号或密码错误;不存在;验证错误;验证码错误;登录失败;");
     }
 
     @Override
@@ -51,14 +52,16 @@ public class JinShanProcessor implements PageLoginProcessor {
     }
 
     public static void main(String[] args) {
-        SpiderLogin spiderLogin = SpiderLogin.create(new JinShanProcessor());
+        SpiderLogin spiderLogin = SpiderLogin.create(new JinShanYouXiProcessor());
         if (!spiderLogin.downloadCode()) {
             return;
         }
         // 输入验证码
         spiderLogin.setCodeValue("cc", LoginUtils.getInputStr());
         if (spiderLogin.startlogin()) {
-            spiderLogin.addUrl("http://i.ijinshan.com/welcome").start();
+            JSONObject jsonObject = JSONObject.parseObject(spiderLogin.getResponseBody());
+            String url = String.valueOf(jsonObject.get("url"));
+            spiderLogin.addUrl(url).start();
         }
     }
 }

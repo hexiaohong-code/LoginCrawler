@@ -51,7 +51,7 @@ public class RenRenWangProcessor implements PageLoginProcessor {
         }
         spiderLogin.setCodeValue("icode", LoginUtils.getInputStr());
         if (spiderLogin.startlogin()) {
-            spiderLogin.addUrl(spiderLogin.getLoginIndex()).start();
+            spiderLogin.addUrl(spiderLogin.getLoginIndexUrl()).start();
         }
     }
 }

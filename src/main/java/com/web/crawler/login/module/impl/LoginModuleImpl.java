@@ -109,6 +109,8 @@ public class LoginModuleImpl implements LoginModule {
                 }
             }
 
+            httpPost.setHeader("X-Forwarded-For",LoginUtils.getIp());
+
             logger.info("Request params：{}", loginEntity.getParams());
             LoginUtils.setParams(httpPost, loginEntity.getParams(), loginEntity.getCharset());
 

@@ -46,7 +46,7 @@ public class ZhiHuProcessor implements PageLoginProcessor {
     public static void main(String[] args) {
         SpiderLogin spiderLogin = SpiderLogin.create(new ZhiHuProcessor());
         if (spiderLogin.startlogin()) {
-            spiderLogin.addUrl(spiderLogin.getLoginIndex()).start();
+            spiderLogin.addUrl(spiderLogin.getLoginIndexUrl()).start();
         }
     }
 }

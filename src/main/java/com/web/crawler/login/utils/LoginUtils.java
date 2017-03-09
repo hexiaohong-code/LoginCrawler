@@ -56,7 +56,7 @@ public class LoginUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginUtils.class);
 
-    private final static String USER_AGENT = "User-Agent:Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11";
+    private final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36";
 
     /**
      * @param url
@@ -325,5 +325,19 @@ public class LoginUtils {
         clientBuilder.setDefaultRequestConfig(requestConfig);
 
         return clientBuilder.build();
+    }
+
+    /**
+     * 伪造IP
+     *
+     * @return
+     */
+    public static String getIp() {
+        return getNum(1,255) + "." + getNum(0,255) + "." + getNum(0,255) + "."
+                +getNum(0,255);
+    }
+
+    public static int getNum(int start,int end) {
+        return (int)(Math.random()*(end-start+1)+start);
     }
 }

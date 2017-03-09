@@ -54,7 +54,7 @@ public class ZhengFangProcessor implements PageLoginProcessor {
         // 输入验证码
         spiderLogin.setCodeValue("TextBox3", LoginUtils.getInputStr());
         if (spiderLogin.startlogin()) {
-            spiderLogin.addUrl(spiderLogin.getLoginIndex()).start();
+            spiderLogin.addUrl(spiderLogin.getLoginIndexUrl()).start();
         }
     }
 }
