@@ -1,6 +1,7 @@
 package com.web.crawler.login.utils;
 
 import com.web.crawler.login.model.ConstantDefine;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -119,7 +120,7 @@ public class LoginUtils {
 
         Document doc = Jsoup.parse(html);
         Element elt = doc.select("form").first();
-        if (elt == null){
+        if (elt == null) {
             return retVal;
         }
 
@@ -325,5 +326,44 @@ public class LoginUtils {
         clientBuilder.setDefaultRequestConfig(requestConfig);
 
         return clientBuilder.build();
+    }
+
+    /**
+     * 去除重复的cookie,以最后为准
+     *
+     * @param cookie
+     * @return
+     */
+    public static String removeSomeCookie(String cookie) {
+
+        if (StringUtils.isBlank(cookie)) {
+
+            return cookie;
+        }
+
+        Map<String, Object> map = new HashedMap();
+
+        String[] strs = cookie.split(";");
+
+        String[] strOthers = null;
+
+        for (String str : strs) {
+
+            if (str.contains("=")) {
+
+                strOthers = str.split("=");
+
+                map.put(strOthers[0], strOthers[1]);
+            }
+        }
+
+        StringBuffer cookieBuffer = new StringBuffer();
+
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+
+            cookieBuffer.append(entry.getKey() + "=" + entry.getValue() + ";");
+        }
+
+        return cookieBuffer.toString();
     }
 }

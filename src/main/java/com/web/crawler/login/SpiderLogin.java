@@ -95,6 +95,8 @@ public class SpiderLogin implements Runnable, Task {
 
     private String loginIndexUrl;
 
+    private HttpResult httpResult;
+
     /**
      * create a spider with pageProcessor.
      *
@@ -766,6 +768,7 @@ public class SpiderLogin implements Runnable, Task {
 
         LoginModule loginModule = new LoginModuleImpl();
         HttpResult httpResult = loginModule.request(this.loginEntity);
+        this.setHttpResult(httpResult);
         if (httpResult.getStatusCode() != 200 && httpResult.getStatusCode() != 302) {
             logger.warn("登录失败,状态码：{};响应错误信息：{}", httpResult.getStatusCode(), httpResult.getBody());
             return false;
@@ -777,6 +780,7 @@ public class SpiderLogin implements Runnable, Task {
             this.loginIndexUrl = httpResult.getLocation();
         }
         logger.info("登录成功后,主页链接：{}", loginIndexUrl);
+        this.site.addHeader("Referer",loginIndexUrl);
         return true;
     }
 
@@ -792,6 +796,15 @@ public class SpiderLogin implements Runnable, Task {
     }
 
     /**
+     * 用户表单输入
+     * @param params
+     */
+    public void setParams(Map<String , Object> params){
+
+        this.loginEntity.getParams().putAll(params);
+    }
+
+    /**
      * get the login successed url of index
      *
      * @return
@@ -799,5 +812,21 @@ public class SpiderLogin implements Runnable, Task {
      */
     public String getLoginIndex() {
         return this.loginIndexUrl;
+    }
+
+    public LoginEntity getLoginEntity() {
+        return loginEntity;
+    }
+
+    public void setLoginEntity(LoginEntity loginEntity) {
+        this.loginEntity = loginEntity;
+    }
+
+    public HttpResult getHttpResult() {
+        return httpResult;
+    }
+
+    public void setHttpResult(HttpResult httpResult) {
+        this.httpResult = httpResult;
     }
 }

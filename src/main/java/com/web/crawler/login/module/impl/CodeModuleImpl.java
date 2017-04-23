@@ -62,6 +62,8 @@ public class CodeModuleImpl implements CodeModule {
 
             loginEntity.setCookie(loginEntity.getCookie()+LoginUtils.getCookie(httpResponse));
 
+            loginEntity.setCookie(LoginUtils.removeSomeCookie(loginEntity.getCookie()));
+
             if (StringUtils.isBlank(loginEntity.getCodeName())) {
                 loginEntity.setCodeName(MD5Utils.digest(loginEntity.getCodeUrl()) + ".jpg");
             }
